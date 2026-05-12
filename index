@@ -1,0 +1,37 @@
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Script-type" content="text/javascript">
+  <meta http-equiv="Content-Style-type" content="text/css">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no,viewport-fit=cover">
+  <title>デレぽ</title>
+  <base href="/">
+</head>
+
+<body class=" _">
+  <div id="app"></div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const viewer_id = Number(params.get("viewer_id") || 0);
+    const sign = params.get("sign") || "";
+    const APIURL = window.location.origin + "/";
+    const IMAGEURL = window.location.origin + "/derepo_v2/image/";
+    const TYPE = "landscape";
+
+    const ua = (navigator.userAgent || "").toLowerCase();
+    const is_mobile_ua = ua.includes("mobile") || ua.includes("android") || ua.includes("iphone");
+    const has_mobile_query = viewer_id !== 0 || sign !== "" || (params.get("time") || "") !== "";
+    const is_pc = !(has_mobile_query || is_mobile_ua);
+    if (is_pc) {
+      document.body.className = " _ is_pc";
+    }
+  </script>
+  <script type="text/javascript" src="/derepo_v2/js/derepo/index.js"></script>
+</body>
+
+</html>
